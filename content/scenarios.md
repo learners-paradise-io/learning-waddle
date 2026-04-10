@@ -15,7 +15,7 @@
   </div>
   <div class="scenario-body">
     <div class="scenario-alert alert-red">
-      🚨 <strong>Alert:</strong> After the nightly ETL load, the source system has 50,000 customer records but the target <code>DIM_CUSTOMER</code> table only has 48,200. 1,800 records are missing.
+      🚨 <strong>Alert:</strong> After the nightly ETL load, the source system has 50,000 customer records but the target <strong>DIM_CUSTOMER</strong> table only has 48,200. 1,800 records are missing.
     </div>
     <details class="scenario-step">
       <summary>📋 Step 1: Confirm the mismatch</summary>
@@ -80,7 +80,7 @@
   </div>
   <div class="scenario-body">
     <div class="scenario-alert alert-amber">
-      ⚠️ <strong>Alert:</strong> The <code>DIM_CUSTOMER</code> table has 52,000 records but only 48,000 unique <code>customer_id</code> values. 4,000 duplicates exist.
+      ⚠️ <strong>Alert:</strong> The <strong>DIM_CUSTOMER</strong> table has 52,000 records but only 48,000 unique <strong>customer_id</strong> values. 4,000 duplicates exist.
     </div>
     <details class="scenario-step">
       <summary>📋 Step 1: Identify duplicate records</summary>
@@ -142,7 +142,7 @@
   </div>
   <div class="scenario-body">
     <div class="scenario-alert alert-red">
-      🚨 <strong>Alert:</strong> In the target table, the <code>customer_tier</code> column shows 'Standard' for all customers, but the business rule says customers with balance > $50,000 should be 'Gold' and > $100,000 should be 'Platinum'.
+      🚨 <strong>Alert:</strong> In the target table, the <strong>customer_tier</strong> column shows 'Standard' for all customers, but the business rule says customers with balance > $50,000 should be 'Gold' and > $100,000 should be 'Platinum'.
     </div>
     <details class="scenario-step">
       <summary>📋 Step 1: Verify the business rule implementation</summary>
@@ -242,7 +242,7 @@
   </div>
   <div class="scenario-body">
     <div class="scenario-alert alert-amber">
-      ⚠️ <strong>Alert:</strong> The <code>email</code> column in <code>DIM_CUSTOMER</code> has 5,000 NULL values, but the mapping document says it should default to 'NOT_PROVIDED' when the source email is NULL.
+      ⚠️ <strong>Alert:</strong> The <strong>email</strong> column in <strong>DIM_CUSTOMER</strong> has 5,000 NULL values, but the mapping document says it should default to 'NOT_PROVIDED' when the source email is NULL.
     </div>
     <details class="scenario-step">
       <summary>📋 Step 1: Quantify the issue</summary>
@@ -326,7 +326,7 @@
   </div>
   <div class="scenario-body">
     <div class="scenario-alert alert-red">
-      🚨 <strong>Alert:</strong> The <code>FACT_TRANSACTION</code> table has 500 records with <code>account_id</code> values that don't exist in <code>DIM_ACCOUNT</code>.
+      🚨 <strong>Alert:</strong> The <strong>FACT_TRANSACTION</strong> table has 500 records with <strong>account_id</strong> values that don't exist in <strong>DIM_ACCOUNT</strong>.
     </div>
     <details class="scenario-step">
       <summary>📋 Step 1: Find the orphan records</summary>
