@@ -7,6 +7,17 @@
 
 ---
 
+> ⚠️ **SQL Dialect Note:** The queries below use **SQL Server** syntax by default (e.g., `GETDATE()`, `LEN()`, `TRY_CAST()`). Your resume spans Oracle, SQL Server, and MySQL. Key equivalents:
+>
+> | Function | SQL Server | Oracle | MySQL |
+> |----------|-----------|--------|-------|
+> | Current date/time | `GETDATE()` | `SYSDATE` | `NOW()` |
+> | String length | `LEN(s)` | `LENGTH(s)` | `LENGTH(s)` |
+> | Safe cast | `TRY_CAST(x AS type)` | *(no direct equivalent)* | *(no direct equivalent)* |
+> | Add days | `DATEADD(day, n, date)` | `date + n` | `DATE_ADD(date, INTERVAL n DAY)` |
+> | Top N rows | `SELECT TOP N ...` | `WHERE ROWNUM <= N` / `FETCH FIRST N ROWS ONLY` | `LIMIT N` |
+>
+
 ## 1. Row Count Validation
 
 ```sql
@@ -180,7 +191,7 @@ FROM fact_order_lines l LEFT JOIN dim_product p ON l.product_id = p.product_id W
 ```sql
 -- Ensure no future dates in historical data
 SELECT * FROM fact_transaction
-WHERE txn_date > GETDATE();
+WHERE txn_date > GETDATE();   -- SQL Server; use SYSDATE (Oracle) or NOW() (MySQL)
 
 -- Ensure no dates before business start
 SELECT * FROM fact_transaction
@@ -192,9 +203,9 @@ WITH date_series AS (
     FROM fact_transaction
     WHERE txn_date BETWEEN '2024-01-01' AND '2024-01-31'
 )
-SELECT DATEADD(day, 1, d1.txn_date) AS missing_date
+SELECT DATEADD(day, 1, d1.txn_date) AS missing_date   -- SQL Server; Oracle: d1.txn_date + 1; MySQL: DATE_ADD(d1.txn_date, INTERVAL 1 DAY)
 FROM date_series d1
-LEFT JOIN date_series d2 ON d2.txn_date = DATEADD(day, 1, d1.txn_date)
+LEFT JOIN date_series d2 ON d2.txn_date = DATEADD(day, 1, d1.txn_date)  -- same adaptation as above
 WHERE d2.txn_date IS NULL
   AND d1.txn_date < '2024-01-31';
 ```
@@ -205,14 +216,14 @@ WHERE d2.txn_date IS NULL
 
 ```sql
 -- Find values that exceed expected length
-SELECT customer_id, customer_name, LEN(customer_name) AS name_length
+SELECT customer_id, customer_name, LEN(customer_name) AS name_length  -- SQL Server; use LENGTH() in Oracle/MySQL
 FROM dim_customer
-WHERE LEN(customer_name) > 100;
+WHERE LEN(customer_name) > 100;  -- SQL Server; use LENGTH() in Oracle/MySQL
 
 -- Find non-numeric values in a "numeric" column stored as varchar
 SELECT account_number
 FROM dim_account
-WHERE TRY_CAST(account_number AS BIGINT) IS NULL
+WHERE TRY_CAST(account_number AS BIGINT) IS NULL  -- SQL Server-specific; no direct equivalent in Oracle/MySQL
   AND account_number IS NOT NULL;
 ```
 
@@ -224,7 +235,7 @@ WHERE TRY_CAST(account_number AS BIGINT) IS NULL
 -- Verify new records were inserted
 SELECT COUNT(*) AS new_records
 FROM dim_customer
-WHERE load_date = CAST(GETDATE() AS DATE);
+WHERE load_date = CAST(GETDATE() AS DATE);  -- SQL Server; use TRUNC(SYSDATE) (Oracle) or CURDATE() (MySQL)
 
 -- Verify updated records were modified, not re-inserted
 SELECT customer_id, COUNT(*) AS versions

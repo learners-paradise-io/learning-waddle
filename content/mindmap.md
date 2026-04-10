@@ -191,7 +191,7 @@ flowchart TD
 |---------|----------|--------|
 | **Scope** | All rows | Can use WHERE |
 | **Speed** | Very fast | Slower |
-| **Rollback?** | ❌ No | ✅ Yes |
+| **Rollback?** | Depends: ❌ Oracle, ✅ SQL Server | ✅ Yes |
 | **Type** | DDL | DML |
 
 | Feature | Surrogate Key | Natural Key |

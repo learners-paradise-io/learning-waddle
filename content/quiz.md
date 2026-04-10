@@ -226,9 +226,9 @@
       <div class="quiz-opt" onclick="answer(18,this,'a','d')"><span class="opt-letter">A</span> TRUNCATE is slower than DELETE</div>
       <div class="quiz-opt" onclick="answer(18,this,'b','d')"><span class="opt-letter">B</span> DELETE can't use WHERE clause</div>
       <div class="quiz-opt" onclick="answer(18,this,'c','d')"><span class="opt-letter">C</span> They are the same operation</div>
-      <div class="quiz-opt" onclick="answer(18,this,'d','d')"><span class="opt-letter">D</span> TRUNCATE removes all rows fast (no rollback); DELETE can target rows (can rollback)</div>
+      <div class="quiz-opt" onclick="answer(18,this,'d','d')"><span class="opt-letter">D</span> TRUNCATE is DDL, removes all rows fast; DELETE is DML, can target rows with WHERE</div>
     </div>
-    <div class="quiz-explain">TRUNCATE is a DDL command — fast, removes all rows, can't rollback. DELETE is DML — slower, can filter with WHERE, can rollback.</div>
+    <div class="quiz-explain">TRUNCATE is DDL — fast, removes all rows, resets identity. DELETE is DML — slower, can filter with WHERE. Rollback nuance: TRUNCATE can be rolled back in SQL Server (inside explicit transaction) but NOT in Oracle (implicit commit).</div>
   </div>
 
   <div class="quiz-question" id="q19">

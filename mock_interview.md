@@ -186,12 +186,15 @@
 
 **Answer:**
 ```sql
+-- SQL Server syntax:
 SELECT TOP 3 customer_id, SUM(amount) AS total_amount
 FROM fact_orders
 GROUP BY customer_id
 ORDER BY total_amount DESC;
+-- In MySQL, replace TOP 3 with LIMIT 3 at the end.
+-- In Oracle, use FETCH FIRST 3 ROWS ONLY at the end (12c+).
 ```
-Or using ROW_NUMBER: 
+Or using ROW_NUMBER (works on all three platforms):
 ```sql
 WITH ranked AS (
     SELECT customer_id, SUM(amount) AS total,
@@ -227,7 +230,7 @@ SELECT * FROM ranked WHERE rn <= 3;
 <details>
 <summary><strong>Q29:</strong> What is the difference between TRUNCATE and DELETE?</summary>
 
-**Answer:** TRUNCATE is DDL — removes ALL rows, very fast, can't be rolled back, resets identity columns. DELETE is DML — can target specific rows with WHERE, slower, can be rolled back in a transaction, doesn't reset identity. In ETL, TRUNCATE is used before full loads, DELETE for targeted cleanup.
+**Answer:** TRUNCATE is DDL — removes ALL rows, very fast, and resets identity columns. DELETE is DML — can target specific rows with WHERE, slower, doesn't reset identity. A key nuance: in SQL Server, TRUNCATE *can* be rolled back if it's inside an explicit transaction (`BEGIN TRAN ... TRUNCATE ... ROLLBACK`). In Oracle, TRUNCATE issues an implicit commit, so it truly cannot be rolled back. Know this difference — it shows depth. In ETL, TRUNCATE is used before full loads, DELETE for targeted cleanup.
 
 </details>
 

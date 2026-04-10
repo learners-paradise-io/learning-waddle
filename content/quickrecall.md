@@ -143,7 +143,7 @@
   </details>
   <details class="recall-card">
     <summary><strong>TRUNCATE vs DELETE</strong></summary>
-    <div class="recall-answer"><strong>TRUNCATE:</strong> Removes all rows, fast, can't rollback, resets identity. <strong>DELETE:</strong> Can target specific rows with WHERE, slower, can rollback, doesn't reset identity.</div>
+    <div class="recall-answer"><strong>TRUNCATE:</strong> DDL, removes all rows, fast, resets identity. Rollback depends on database — yes in SQL Server (explicit transaction), no in Oracle (implicit commit). <strong>DELETE:</strong> DML, can target specific rows with WHERE, slower, always rollback-safe in a transaction.</div>
   </details>
   <details class="recall-card">
     <summary><strong>UNION vs UNION ALL</strong></summary>

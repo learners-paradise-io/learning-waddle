@@ -1781,7 +1781,7 @@
         "A <strong>NULL</strong> in SQL is not equal to anything — not even another NULL. Use <code>IS NULL</code>, not <code>= NULL</code>.",
         "<strong>Window functions</strong> like ROW_NUMBER() and RANK() let you perform calculations across rows without collapsing them like GROUP BY does.",
         "The most common ETL defect? <strong>Missing records</strong> — always check row counts between source and target first.",
-        "<strong>TRUNCATE</strong> removes all rows and is fast but can't be rolled back. <strong>DELETE</strong> is slower but can target specific rows and be rolled back.",
+        "<strong>TRUNCATE</strong> removes all rows fast and is DDL. In Oracle it can't be rolled back (implicit commit), but in SQL Server it <em>can</em> be rolled back inside an explicit transaction. <strong>DELETE</strong> is DML — slower but can target specific rows.",
         "A <strong>CTE (Common Table Expression)</strong> using WITH lets you write cleaner, more readable subqueries.",
         "<strong>Data reconciliation</strong> means comparing totals, counts, and checksums between source and target to ensure data completeness.",
         "When testing ETL transformations, always check <strong>boundary conditions</strong>: NULLs, empty strings, maximum lengths, and special characters.",

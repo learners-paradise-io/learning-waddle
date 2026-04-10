@@ -93,6 +93,8 @@ Practice this until it feels natural:
 
 ## 🌟 Pre-Written STAR Answers
 
+> ⚠️ **Personalize Before Using:** The STAR stories below are **templates** with realistic but **placeholder details** (e.g., "2,000 records," "30% improvement," "$100 mismatch"). These numbers are NOT from your resume — they're illustrative. **Before the interview, replace them with your own real figures and project details.** If an interviewer probes a specific number you can't back up, it undermines credibility. Make each story *yours*.
+
 ### STAR 1: "Tell me about a time you found a critical data issue."
 
 <div class="model-answer">
